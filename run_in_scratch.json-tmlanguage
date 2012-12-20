@@ -2,19 +2,39 @@
   "scopeName": "source.run_in_scratch",
   "fileTypes": [""],
   "patterns": [
-    { "match": "(^.+\\.rb:\\d+:[^\\n]+\\(.+Error\\))",
-      "name": "error.run_in_scratch",
+    { "match": "((?:\"[^\"]+\")|(?::[a-zA-Z_]+))",
+      "name": "string.run_in_scratch",
       "captures": {
-            "1": { "name": "constant.character.escape.run_in_scratch" }
-         },
-      "comment": "This comment is optional."
+            "1": { "name": "string.run_in_scratch" }
+            },
+      "comment": "Double quoted strings."
     },
-    { "match": "(^  .+)",
-      "name": "error.run_in_scratch",
+    { "name": "error.run_in_scratch",
+      "begin": "(^.+:\\d+:[^\\n]+\\(.+Error\\)\\n?)",
+      "beginCaptures": {
+      "1": { "name": "constant.character.escape.ssraw" }
+      },
+      "patterns": [
+            { "name": "constant.character.escape.run_in_scratch",
+              "match": "."
+            }
+         ],
+      "end": "(?=^[^ ])",
+      "comment": "Ruby error backtraces."
+    },
+    { "match": "(\\+|-\\*|\\\\|=>|=|<<)",
+      "name": "interpreter_build.run_in_scratch",
       "captures": {
-            "1": { "name": "constant.character.escape.run_in_scratch" }
+            "1": { "name": "keyword.control.run_in_scratch" }
          },
-      "comment": "This comment is optional."
+      "comment": "Operators."
+    },
+    { "match": "(^Ruby \\d\\.\\d\\.\\d .+)",
+      "name": "interpreter_build.run_in_scratch",
+      "captures": {
+            "1": { "name": "keyword.control.run_in_scratch" }
+         },
+      "comment": "The first line with the interpreter details."
     },
     { "match": "(^.+\\.rb: )(line: \\d+)",
       "name": "string.run_in_scratch",
@@ -22,23 +42,15 @@
             "1": { "name": "string.run_in_scratch" },
             "2": { "name": "string.run_in_scratch" }
          },
-      "comment": "This comment is optional."
-    },
-    { "match": "((?:\"[^\"]+\")|(?::[a-zA-Z]+))",
-      "name": "string.run_in_scratch",
-      "captures": {
-            "1": { "name": "string.run_in_scratch" }
-            },
-      "comment": "This comment is optional."
+      "comment": "One of my log messages."
     },
     { "match": "(true|false)",
       "name": "bool.run_in_scratch",
       "captures": {
             "1": { "name": "constant.numeric.run_in_scratch" }
-         },
-      "comment": "This comment is optional."
+         }
     },
-    { "match": "(\\d+)",
+    { "match": "(\\b\\d+\\b)",
       "name": "numeric.run_in_scratch",
       "captures": {
             "1": { "name": "constant.numeric.run_in_scratch" }

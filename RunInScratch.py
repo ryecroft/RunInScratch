@@ -104,16 +104,16 @@ class GoToLineListener(sublime_plugin.EventListener):
 				match = re.search(file_name, str(name))
 				if match:
 					return view
+		return False		
 
 	def on_selection_modified(self, view):
 		if view.settings().get("RunInScratch") == True:
 			text = view.substr(view.line(view.sel()[0]))
-			match = re.search(r'^.+ from (.+\.rb):(\d+):in', text)
+			match = re.search(r'^.+ from (.+\.rb):(\d+)', text)
 			if match:
 				parent_view = self.get_parent_view(match.group(1))
+				if parent_view == False:
+					return
 				parent_view.sel().clear()
 				parent_view.run_command("goto_line", {"line":int(match.group(2))})
 				parent_view.sel().add(parent_view.line(parent_view.sel()[0]))
-
-
-				

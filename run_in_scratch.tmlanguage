@@ -16,15 +16,42 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.character.escape.run_in_scratch</string>
+					<string>string.run_in_scratch</string>
 				</dict>
 			</dict>
 			<key>comment</key>
-			<string>This comment is optional.</string>
+			<string>Double quoted strings.</string>
 			<key>match</key>
-			<string>(^.+\.rb:\d+:[^\n]+\(.+Error\))</string>
+			<string>((?:"[^"]+")|(?::[a-zA-Z_]+))</string>
+			<key>name</key>
+			<string>string.run_in_scratch</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(^.+:\d+:[^\n]+\(.+Error\)\n?)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.ssraw</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Ruby error backtraces.</string>
+			<key>end</key>
+			<string>(?=^[^ ])</string>
 			<key>name</key>
 			<string>error.run_in_scratch</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>.</string>
+					<key>name</key>
+					<string>constant.character.escape.run_in_scratch</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -32,15 +59,31 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.character.escape.run_in_scratch</string>
+					<string>keyword.control.run_in_scratch</string>
 				</dict>
 			</dict>
 			<key>comment</key>
-			<string>This comment is optional.</string>
+			<string>Operators.</string>
 			<key>match</key>
-			<string>(^  .+)</string>
+			<string>(\+|-\*|\\|=&gt;|=|&lt;&lt;)</string>
 			<key>name</key>
-			<string>error.run_in_scratch</string>
+			<string>interpreter_build.run_in_scratch</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.run_in_scratch</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>The first line with the interpreter details.</string>
+			<key>match</key>
+			<string>(^Ruby \d\.\d\.\d .+)</string>
+			<key>name</key>
+			<string>interpreter_build.run_in_scratch</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -57,25 +100,9 @@
 				</dict>
 			</dict>
 			<key>comment</key>
-			<string>This comment is optional.</string>
+			<string>One of my log messages.</string>
 			<key>match</key>
 			<string>(^.+\.rb: )(line: \d+)</string>
-			<key>name</key>
-			<string>string.run_in_scratch</string>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>string.run_in_scratch</string>
-				</dict>
-			</dict>
-			<key>comment</key>
-			<string>This comment is optional.</string>
-			<key>match</key>
-			<string>((?:"[^"]+")|(?::[a-zA-Z]+))</string>
 			<key>name</key>
 			<string>string.run_in_scratch</string>
 		</dict>
@@ -88,8 +115,6 @@
 					<string>constant.numeric.run_in_scratch</string>
 				</dict>
 			</dict>
-			<key>comment</key>
-			<string>This comment is optional.</string>
 			<key>match</key>
 			<string>(true|false)</string>
 			<key>name</key>
@@ -107,7 +132,7 @@
 			<key>comment</key>
 			<string>This comment is optional.</string>
 			<key>match</key>
-			<string>(\d+)</string>
+			<string>(\b\d+\b)</string>
 			<key>name</key>
 			<string>numeric.run_in_scratch</string>
 		</dict>
