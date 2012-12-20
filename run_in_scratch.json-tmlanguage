@@ -10,7 +10,7 @@
       "comment": "Double quoted strings."
     },
     { "name": "error.run_in_scratch",
-      "begin": "(^.+:\\d+:[^\\n]+\\(.+Error\\)\\n?)",
+      "begin": "(^.+:\\d+:[^\\n]+\\(?.+[Ee]rror\\)?\\n?)",
       "beginCaptures": {
       "1": { "name": "constant.character.escape.ssraw" }
       },

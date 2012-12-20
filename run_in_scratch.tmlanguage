@@ -28,7 +28,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(^.+:\d+:[^\n]+\(.+Error\)\n?)</string>
+			<string>(^.+:\d+:[^\n]+\(?.+[Ee]rror\)?\n?)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
